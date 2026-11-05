@@ -50,7 +50,7 @@ select.field{width:auto;flex:1;min-width:130px}
 .meta .num{color:var(--mut)}.meta b{color:var(--acc)}
 .scene{perspective:1400px;width:100%;min-height:380px;cursor:pointer;outline-offset:6px}
 .card{position:relative;min-height:380px;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .68s cubic-bezier(.2,.72,.18,1)}
-.card.flipped{transform:rotateY(180deg)}.card.enter{animation:pop .3s ease both}
+.card.flipped{transform:rotateY(180deg)}.card.enter{animation:pop .3s ease backwards}
 @keyframes pop{from{opacity:.2;transform:scale(.97)}to{opacity:1;transform:none}}
 .face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;border-radius:28px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;isolation:isolate;text-align:center}
 .face:before{content:"";position:absolute;inset:12px;border-radius:20px;border:1px solid rgba(255,255,255,.2);pointer-events:none}
