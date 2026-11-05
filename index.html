@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2b3a8f">
+<title>Hangul Atelier · Flashcard tiếng Hàn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f3fa;--b1:rgba(255,196,180,.65);--b2:rgba(176,190,250,.6);--ink:#1f2340;--mut:#6b6f8c;--pri:#2b3a8f;--acc:#e4572e;--glass:rgba(255,255,255,.66);--glassb:rgba(255,255,255,.85);--line:rgba(43,58,143,.14);--field:rgba(255,255,255,.88);--k1:#fffdf8;--k2:#eceffb;--okbg:#e0f3e8;--ok:#1f7a4d;--rvbg:#ffe9df;--rv:#b4411d;--shadow:rgba(30,40,110,.12);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11132a;--b1:rgba(228,87,46,.16);--b2:rgba(80,100,220,.24);--ink:#eceefb;--mut:#9aa0c4;--pri:#a9b4ff;--glass:rgba(30,34,72,.62);--glassb:rgba(40,46,92,.9);--line:rgba(255,255,255,.12);--field:rgba(255,255,255,.08);--k1:#252a56;--k2:#1b1f42;--okbg:#17382b;--ok:#6fd7a3;--rvbg:#40241c;--rv:#ff9b78;--shadow:rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#11132a;--b1:rgba(228,87,46,.16);--b2:rgba(80,100,220,.24);--ink:#eceefb;--mut:#9aa0c4;--pri:#a9b4ff;--glass:rgba(30,34,72,.62);--glassb:rgba(40,46,92,.9);--line:rgba(255,255,255,.12);--field:rgba(255,255,255,.08);--k1:#252a56;--k2:#1b1f42;--okbg:#17382b;--ok:#6fd7a3;--rvbg:#40241c;--rv:#ff9b78;--shadow:rgba(0,0,0,.35)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}[hidden]{display:none!important}
+body{margin:0;min-height:100vh;color:var(--ink);font:500 15px/1.5 Manrope,"Noto Sans KR",system-ui,sans-serif;background:radial-gradient(circle at 10% 0,var(--b1),transparent 32%),radial-gradient(circle at 95% 8%,var(--b2),transparent 30%),var(--bg)}
+.ko{font-family:"Noto Sans KR",Manrope,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:14px 14px 40px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0 14px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font:700 24px "Noto Sans KR";color:#fff3d6;background:linear-gradient(145deg,#3a4cb8,#1b2566);box-shadow:0 8px 20px var(--shadow)}
+h1{margin:0;font-size:19px;font-weight:800;letter-spacing:-.02em}h1 b{color:var(--acc)}
+.sub{margin:0;font-size:12px;color:var(--mut)}
+.glass{background:var(--glass);border:1px solid var(--glassb);box-shadow:0 12px 38px var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.btn,.icon,.tab{border:0;font:800 13px Manrope,"Noto Sans KR",sans-serif;cursor:pointer;touch-action:manipulation;user-select:none;transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .2s,background .2s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:14px;padding:11px 15px;white-space:nowrap;color:var(--pri)}
+.btn:active,.icon:active,.tab:active{transform:scale(.94)}
+.btn.p{color:#fff;background:linear-gradient(135deg,#3a4cb8,#1b2566);box-shadow:0 8px 20px rgba(43,58,143,.28)}
+.btn.l{background:var(--glassb);border:1px solid var(--line)}
+.btn.g{color:#4a3510;background:linear-gradient(135deg,#f8e6a9,#e0b13f)}
+.btn.ok{color:var(--ok);background:var(--okbg)}.btn.rv{color:var(--rv);background:var(--rvbg)}
+.btn.sm{padding:8px 12px;font-size:12px}
+.icon{width:42px;height:42px;border-radius:14px;color:var(--pri);background:var(--glassb);border:1px solid var(--line);font-size:17px}
+:focus-visible{outline:3px solid rgba(224,177,63,.7);outline-offset:3px}
+@media(hover:hover){.btn:hover,.icon:hover{transform:translateY(-2px)}}
+.tabs{display:flex;gap:6px;padding:6px;border-radius:20px;margin-bottom:16px}
+.tab{flex:1;padding:11px;border-radius:14px;background:transparent;color:var(--mut)}
+.tab.on{background:var(--glassb);color:var(--pri);box-shadow:0 5px 18px var(--shadow)}
+.pill{display:inline-block;border-radius:99px;padding:2px 9px;font-size:11px;font-weight:800;background:var(--k2);color:var(--pri)}
+.view{animation:vin .32s cubic-bezier(.2,.75,.25,1) both}
+@keyframes vin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.bar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.field{width:100%;border:1px solid var(--line);border-radius:13px;background:var(--field);color:var(--ink);padding:11px 13px;font:600 14px Manrope,"Noto Sans KR",sans-serif;outline:none}
+.field:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(228,87,46,.15)}
+select.field{width:auto;flex:1;min-width:130px}
+.panel{border-radius:28px;padding:14px}
+.meta{display:flex;justify-content:space-between;align-items:center;padding:0 4px 12px;font-weight:800;font-size:13px}
+.meta .num{color:var(--mut)}.meta b{color:var(--acc)}
+.scene{perspective:1400px;width:100%;min-height:380px;cursor:pointer;outline-offset:6px}
+.card{position:relative;min-height:380px;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .68s cubic-bezier(.2,.72,.18,1)}
+.card.flipped{transform:rotateY(180deg)}.card.enter{animation:pop .3s ease both}
+@keyframes pop{from{opacity:.2;transform:scale(.97)}to{opacity:1;transform:none}}
+.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;border-radius:28px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;isolation:isolate;text-align:center}
+.face:before{content:"";position:absolute;inset:12px;border-radius:20px;border:1px solid rgba(255,255,255,.2);pointer-events:none}
+.front{color:#f4f1ff;background:radial-gradient(circle at 82% 12%,rgba(255,170,140,.3),transparent 30%),linear-gradient(150deg,#3b4dbb,#222d7a 58%,#151c52);box-shadow:0 20px 45px rgba(27,37,102,.3)}
+.back{transform:rotateY(180deg);color:var(--ink);background:radial-gradient(circle at 90% 8%,rgba(228,87,46,.16),transparent 30%),linear-gradient(150deg,var(--k1),var(--k2));border:1px solid var(--line);box-shadow:0 20px 45px var(--shadow)}
+.back:before{border-color:var(--line)}
+.wm{position:absolute;right:14px;bottom:-40px;font:700 210px/1 "Noto Sans KR";color:rgba(255,255,255,.06);pointer-events:none;z-index:-1}
+.back .wm{color:rgba(43,58,143,.06)}
+.tag{font-style:normal;font-size:12px;font-weight:800;border-radius:99px;padding:4px 13px;margin-bottom:16px;background:rgba(255,255,255,.14)}
+.back .tag{background:var(--rvbg);color:var(--rv)}
+.fm{font-family:"Noto Sans KR",Manrope,sans-serif;font-weight:700;line-height:1.2;word-break:keep-all}
+.tap{margin:18px 0 0;font-size:12px;opacity:.7}
+.bh{font:700 clamp(2.4rem,9vw,3.6rem)/1.2 "Noto Sans KR";color:var(--pri);word-break:keep-all}
+.br{margin-top:6px;font-size:21px;font-weight:800;color:var(--acc)}
+.back hr{width:56px;border:0;height:2px;background:var(--acc);opacity:.5;margin:14px 0}
+.bm{margin:0;font-size:21px;font-weight:800}.bx{margin:10px 0 14px;font-size:13px;color:var(--mut);max-width:420px}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;margin-top:14px}
+.prog{margin-top:16px;padding:14px;border-radius:20px;background:var(--glass)}
+.track{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0 12px}
+.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pri),var(--acc));transition:width .4s ease}
+.flt{border:0;border-radius:11px;padding:8px 12px;font:800 12px Manrope,"Noto Sans KR";cursor:pointer;color:var(--mut);background:var(--field)}
+.flt.on{background:var(--pri);color:var(--bg)}
+.kbd{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border-radius:7px;border:1px solid var(--line);background:var(--field);font-size:11px;font-weight:800}
+.empty{text-align:center;padding:50px 16px;border:1px dashed var(--line);border-radius:24px}
+.list{display:grid;gap:8px;margin-top:12px}
+.item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;animation:rise .28s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.item .h{font:700 22px "Noto Sans KR";min-width:0;overflow-wrap:anywhere}
+.item .i{flex:1;min-width:0}.item .m{font-size:13px;color:var(--mut)}.item .r{font-size:12px;color:var(--acc);font-weight:800}
+.st{font-size:11px;font-weight:800;border-radius:99px;padding:3px 9px}
+.st.known{background:var(--okbg);color:var(--ok)}.st.review{background:var(--rvbg);color:var(--rv)}
+.mod{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:14px;background:rgba(15,18,50,.55);backdrop-filter:blur(7px);animation:fade .2s both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sheet{width:min(560px,100%);max-height:calc(100vh - 28px);overflow:auto;border-radius:26px;padding:20px;background:var(--glassb);border:1px solid var(--line);box-shadow:0 30px 90px rgba(10,12,40,.4);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);animation:sheet .28s cubic-bezier(.2,.8,.2,1) both}
+@keyframes sheet{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.sheet h2{margin:0 0 4px;font-size:19px}label{display:block;font-size:12px;font-weight:800;color:var(--mut);margin:12px 0 5px}
+.syls{display:flex;gap:10px;overflow-x:auto;padding:14px 2px 6px}
+.syl{flex:0 0 auto;width:112px;text-align:center;padding:14px 8px;border-radius:20px;background:var(--field);border:1px solid var(--line);animation:rise .5s calc(var(--i)*.16s) both}
+.sbig{border:0;background:none;cursor:pointer;font:700 46px/1.1 "Noto Sans KR";color:var(--pri)}
+.parts{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:3px;margin-top:8px;font:700 19px "Noto Sans KR"}
+.parts span{display:inline-block;padding:2px 7px;border-radius:9px;background:var(--rvbg);color:var(--rv);animation:drop .45s calc(var(--i)*.16s + var(--j)*.2s + .25s) both cubic-bezier(.2,1.4,.4,1)}
+.parts em{font-style:normal;color:var(--mut);font-size:13px}.parts small{font-size:9px;display:block;line-height:1}
+@keyframes drop{from{opacity:0;transform:translateY(-16px) scale(.6)}to{opacity:1;transform:none}}
+.srr{margin-top:8px;font-weight:800;color:var(--acc)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:90;max-width:90vw;padding:11px 18px;border-radius:14px;font-weight:800;font-size:13px;color:#fff;background:#1b2566;box-shadow:0 10px 30px rgba(0,0,0,.3);animation:rise .25s both}
+.toast.err{background:#b4411d}
+@media(max-width:560px){.scene,.card{min-height:350px}.btn{padding:10px 12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="logo">한</div><div><h1>Hangul <b>Atelier</b></h1><p class="sub">Không gian học tiếng Hàn của riêng bạn</p></div></div>
+    <button class="icon" id="resetBtn" title="Khôi phục dữ liệu mẫu" aria-label="Khôi phục dữ liệu mẫu">↻</button>
+  </header>
+  <nav class="glass tabs" role="tablist">
+    <button class="tab on" id="tabStudy" role="tab">◈ Học tập</button>
+    <button class="tab" id="tabLib" role="tab">▤ Kho từ vựng <span class="pill" id="count">0</span></button>
+  </nav>
+
+  <section id="study" class="view">
+    <div class="bar"><select id="unitSel" class="field" aria-label="Chọn chủ đề"></select><button id="revBtn" class="btn l">⇄ Đảo mặt</button><button id="shufBtn" class="btn l">⤨ Trộn <span class="kbd">R</span></button></div>
+    <div class="glass panel">
+      <div class="meta"><span id="unitName"></span><span class="num"><b id="cur">00</b> / <span id="tot">00</span></span></div>
+      <div id="empty" class="empty" hidden><div style="font-size:38px">🌸</div><h3>Chưa có thẻ trong bộ lọc này</h3><p class="sub">Đổi bộ lọc ghi nhớ hoặc thêm từ mới vào kho.</p><button id="emptyAdd" class="btn p" style="margin-top:12px">＋ Thêm từ mới</button></div>
+      <div id="cardArea">
+        <div class="scene" id="scene" tabindex="0" role="button" aria-label="Bấm để lật thẻ">
+          <div class="card" id="card">
+            <div class="face front"><span class="wm ko" id="wmF"></span><i class="tag" id="tagF"></i><div class="fm" id="fm"></div><p class="tap">Chạm vào thẻ để lật</p></div>
+            <div class="face back"><span class="wm ko" id="wmB"></span><i class="tag">Ghi nhớ · 기억</i><div class="bh" id="bh"></div><div class="br" id="br"></div><hr><p class="bm" id="bm"></p><p class="bx" id="bx"></p><button id="bGen" class="btn g sm" style="margin-bottom:12px" hidden>✦ Tạo câu ví dụ</button><button id="bSpeak" class="btn l sm">🔊 Nghe phát âm <span class="kbd">S</span></button></div>
+          </div>
+        </div>
+        <div class="row">
+          <button id="sylBtn" class="btn g">🧩 Phân tích âm tiết</button>
+          <button id="flipBtn" class="btn l">↻ Lật thẻ <span class="kbd">Space</span></button>
+        </div>
+        <div class="row">
+          <button id="prevBtn" class="icon" aria-label="Thẻ trước">←</button>
+          <button id="rvBtn" class="btn rv">✕ Cần ôn lại</button>
+          <button id="okBtn" class="btn ok">✓ Đã thuộc</button>
+          <button id="nextBtn" class="icon" aria-label="Thẻ sau">→</button>
+        </div>
+      </div>
+      <div class="prog">
+        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:800"><span>Tiến độ ghi nhớ</span><span id="plabel" style="color:var(--acc)"></span></div>
+        <div class="track"><div class="fill" id="fill" style="width:0"></div></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap" id="flts"><button class="flt on" data-f="all">Tất cả</button><button class="flt" data-f="review">✕ Cần ôn lại</button><button class="flt" data-f="known">✓ Đã thuộc</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lib" class="view" hidden>
+    <div class="bar"><input id="search" class="field" style="flex:1;min-width:150px" placeholder="Tìm từ Hàn, romaja hoặc nghĩa…" aria-label="Tìm kiếm"><button id="addBtn" class="btn p">＋ Thêm từ</button></div>
+    <div class="list" id="list"></div>
+  </section>
+</div>
+
+<div class="mod" id="wordMod" hidden><form class="sheet" id="wordForm">
+  <h2>Thêm từ mới</h2><p class="sub">Romaja được tạo tự động từ chữ Hangul.</p>
+  <label for="fh">Từ tiếng Hàn</label><input id="fh" class="field ko" placeholder="예: 고마워요" autocomplete="off" required>
+  <p class="r" id="fprev" style="margin:6px 0 0;font-weight:800;color:var(--acc)">—</p>
+  <button type="button" id="fillBtn" class="btn g sm" style="margin-top:10px" hidden>✦ Tự động điền</button>
+  <p class="sub" id="fnote" style="margin:6px 0 0" hidden>Claude chỉ điền các ô còn trống. Hãy kiểm tra lại nghĩa và ví dụ.</p>
+  <label for="fm2">Nghĩa tiếng Việt</label><input id="fm2" class="field" required>
+  <label for="fu">Chủ đề</label><input id="fu" class="field" list="ul" placeholder="Chưa phân loại"><datalist id="ul"></datalist>
+  <label for="fe">Câu ví dụ (tuỳ chọn)</label><input id="fe" class="field ko">
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn l" data-close="wordMod">Huỷ</button><button class="btn p">Lưu từ vựng</button></div>
+</form></div>
+
+<div class="mod" id="sylMod" hidden><div class="sheet">
+  <h2 id="sylTitle"></h2><p class="sub">Mỗi âm tiết ghép từ phụ âm đầu, nguyên âm và (có thể) patchim. Chạm vào âm tiết để nghe.</p>
+  <div class="syls" id="syls"></div>
+  <div class="row" style="justify-content:flex-end"><button class="btn l" id="sylReplay">▶ Xem lại</button><button class="btn p" data-close="sylMod">Đóng</button></div>
+</div></div>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id), KEY="hangul-atelier-v1";
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* ---------- Hangul: tách jamo + romaja (Revised Romanization, có liên âm/biến âm cơ bản) ---------- */
+const L=["g","kk","n","d","tt","r","m","b","pp","s","ss","","j","jj","ch","k","t","p","h"];
+const V=["a","ae","ya","yae","eo","e","yeo","ye","o","wa","wae","oe","yo","u","wo","we","wi","yu","eu","ui","i"];
+const T=["","k","k","k","n","n","n","t","l","k","m","l","l","l","p","l","m","p","p","t","t","ng","t","t","k","t","p","t"];
+const LJ=Array.from("ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"),VJ=Array.from("ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ"),TJ=Array.from(" ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ");
+const TL={1:0,4:2,7:3,8:5,16:6,17:7,19:9,20:10,22:12,23:14,24:15,25:16,26:17,27:11};
+const isH=c=>{const n=c.charCodeAt(0);return n>=44032&&n<=55203};
+const dec=c=>{const n=c.charCodeAt(0)-44032;return[Math.floor(n/588),Math.floor(n%588/28),n%28]};
+function roman(s){
+  const a=Array.from(s).map(c=>isH(c)?dec(c):c);
+  a.forEach((x,i)=>{const n=a[i+1];if(!Array.isArray(x)||!Array.isArray(n)||!x[2])return;
+    if(n[0]===11&&TL[x[2]]!==undefined){n[0]=TL[x[2]];x[2]=0}
+    else if(n[0]===2||n[0]===6){if([1,2,3,9,24].includes(x[2]))x[2]=21;else if([7,19,20,22,23,25,27].includes(x[2]))x[2]=4;else if([14,17,18,26].includes(x[2]))x[2]=16}});
+  return a.map(x=>Array.isArray(x)?L[x[0]]+V[x[1]]+T[x[2]]:x).join("");
+}
+/* ---------- Dữ liệu mẫu: Hangul|nghĩa|chủ đề|ví dụ ---------- */
+const SEED=`안녕하세요|Xin chào|Chào hỏi|안녕하세요, 만나서 반갑습니다. — Xin chào, rất vui được gặp bạn.
+감사합니다|Cảm ơn|Chào hỏi|도와주셔서 감사합니다. — Cảm ơn vì đã giúp tôi.
+죄송합니다|Xin lỗi|Chào hỏi|늦어서 죄송합니다. — Xin lỗi vì tôi đến muộn.
+네|Vâng, dạ|Chào hỏi|
+아니요|Không|Chào hỏi|
+안녕히 가세요|Tạm biệt (nói với người ra về)|Chào hỏi|
+처음 뵙겠습니다|Rất hân hạnh lần đầu gặp|Chào hỏi|
+가족|Gia đình|Con người|우리 가족은 네 명이에요. — Gia đình tôi có bốn người.
+엄마|Mẹ|Con người|
+아빠|Bố|Con người|
+친구|Bạn bè|Con người|친구를 만나요. — Tôi gặp bạn.
+선생님|Giáo viên, thầy cô|Con người|
+학생|Học sinh, sinh viên|Con người|
+물|Nước|Đồ ăn|물 주세요. — Cho tôi xin nước.
+밥|Cơm, bữa ăn|Đồ ăn|밥 먹었어요? — Bạn ăn cơm chưa?
+김치|Kim chi|Đồ ăn|
+커피|Cà phê|Đồ ăn|
+맛있다|Ngon|Đồ ăn|정말 맛있어요! — Ngon thật đấy!
+학교|Trường học|Hằng ngày|학교에 가요. — Tôi đi học.
+한국어|Tiếng Hàn|Hằng ngày|한국어를 공부해요. — Tôi học tiếng Hàn.
+오늘|Hôm nay|Hằng ngày|
+내일|Ngày mai|Hằng ngày|내일 만나요. — Mai gặp nhé.
+사랑|Tình yêu|Hằng ngày|
+좋아요|Tốt, thích|Hằng ngày|`;
+const seed=()=>({rev:false,unit:"all",words:SEED.split("\n").map((l,i)=>{const[h,m,u,e]=l.split("|");return{id:"s"+i,h,m,u,e:e||"",s:"review"}})});
+const load=()=>{try{const j=JSON.parse(localStorage.getItem(KEY));if(j&&Array.isArray(j.words)&&j.words.length)return j}catch(e){}return seed()};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+let S=load(),idx=0,flipped=false,filter="all",order=null,sylWord=null;
+
+/* ---------- Tiện ích ---------- */
+function toast(t,err){const d=document.createElement("div");d.className="toast"+(err?" err":"");d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+function speak(t){if(!("speechSynthesis"in window)){toast("Trình duyệt chưa hỗ trợ đọc phát âm.",1);return}
+  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";u.rate=.8;
+  const v=speechSynthesis.getVoices();u.voice=v.find(x=>/^ko/i.test(x.lang))||null;speechSynthesis.speak(u)}
+const units=()=>[...new Set(S.words.map(w=>w.u))];
+const base=()=>S.words.filter(w=>S.unit==="all"||w.u===S.unit);
+function deck(){let b=base().filter(w=>filter==="all"||w.s===filter);
+  if(order){const k=w=>{const i=order.indexOf(w.id);return i<0?1e9:i};b=b.slice().sort((x,y)=>k(x)-k(y))}return b}
+const cur=()=>deck()[idx];
+const fs=t=>{const n=Array.from(t).length;return n<=3?"clamp(4rem,19vw,6.2rem)":n<=6?"clamp(2.6rem,12vw,4rem)":"clamp(1.6rem,7vw,2.3rem)"};
+
+/* ---------- Hiển thị ---------- */
+function renderSel(){const us=units();if(S.unit!=="all"&&!us.includes(S.unit))S.unit="all";
+  $("unitSel").innerHTML='<option value="all">Tất cả chủ đề</option>'+us.map(u=>`<option ${u===S.unit?"selected":""}>${esc(u)}</option>`).join("");
+  $("ul").innerHTML=us.map(u=>`<option value="${esc(u)}">`).join("")}
+function renderStudy(){
+  const d=deck(),w=d[idx]||(idx=0,d[0]);
+  $("empty").hidden=!!w;$("cardArea").hidden=!w;
+  $("unitName").textContent=S.unit==="all"?"Tất cả chủ đề":S.unit;
+  $("cur").textContent=String(w?idx+1:0).padStart(2,"0");$("tot").textContent=String(d.length).padStart(2,"0");
+  $("revBtn").style.background=S.rev?"var(--k2)":"";
+  if(w){const f=S.rev?w.m:w.h;$("fm").textContent=f;$("fm").style.fontSize=S.rev?"clamp(1.7rem,8vw,2.5rem)":fs(f);
+    $("tagF").textContent=S.rev?"Nghĩa · 뜻":"Từ vựng · 한국어";$("wmF").textContent=$("wmB").textContent=Array.from(w.h)[0];
+    $("bh").textContent=w.h;$("br").textContent=roman(w.h);$("bm").textContent=w.m;$("bx").textContent=w.e;$("bx").hidden=!w.e;$("bGen").hidden=!sample||!!w.e}
+  const b=base(),k=b.filter(x=>x.s==="known").length,p=b.length?Math.round(k/b.length*100):0;
+  $("plabel").textContent=`${p}% · ${k}/${b.length} thuộc`;$("fill").style.width=p+"%";
+  document.querySelectorAll(".flt").forEach(x=>x.classList.toggle("on",x.dataset.f===filter));
+  $("count").textContent=S.words.length}
+function renderLib(){const q=$("search").value.trim().toLowerCase();
+  const a=S.words.filter(w=>!q||(w.h+roman(w.h)+w.m+w.u).toLowerCase().includes(q));
+  $("list").innerHTML=a.length?a.map((w,i)=>`<div class="glass item" style="animation-delay:${Math.min(i,12)*.03}s"><div class="h">${esc(w.h)}</div><div class="i"><div class="r">${esc(roman(w.h))}</div><div class="m">${esc(w.m)} · ${esc(w.u)}</div></div><span class="st ${w.s}">${w.s==="known"?"Đã thuộc":"Cần ôn"}</span><button class="icon" data-a="say" data-id="${w.id}" aria-label="Nghe">🔊</button><button class="icon" data-a="del" data-id="${w.id}" aria-label="Xoá">🗑</button></div>`).join(""):'<div class="empty">Không tìm thấy từ nào.</div>'}
+function renderAll(){renderSel();renderStudy();renderLib();save()}
+
+/* ---------- Thẻ ---------- */
+function flip(){if(!cur())return;flipped=!flipped;$("card").classList.toggle("flipped",flipped)}
+function go(n){const d=deck();if(!d.length)return;const was=flipped;flipped=false;$("card").classList.remove("flipped");
+  idx=(n+d.length)%d.length;setTimeout(()=>{renderStudy();const c=$("card");c.classList.remove("enter");void c.offsetWidth;c.classList.add("enter")},was?260:0)}
+function mark(s){const w=cur();if(!w)return;w.s=s;save();
+  if(filter!=="all"&&s!==filter){flipped=false;$("card").classList.remove("flipped");idx=Math.min(idx,Math.max(0,deck().length-1))}
+  renderStudy();renderLib();toast(s==="known"?"Đã đánh dấu “Đã thuộc”.":"Đã đưa vào danh sách cần ôn.");
+  if(filter==="all"&&deck().length>1)go(idx+1)}
+function shuffle(){order=base().map(w=>w.id).sort(()=>Math.random()-.5);idx=0;flipped=false;$("card").classList.remove("flipped");renderStudy();toast("Đã trộn thứ tự thẻ.")}
+
+/* ---------- Phân tích âm tiết (thay cho công cụ nét chữ Hán) ---------- */
+function openSyl(w){const cs=Array.from(w.h).filter(isH);if(!cs.length){toast("Từ này không có âm tiết Hangul.",1);return}
+  sylWord=w;$("sylTitle").textContent="Phân tích: "+w.h;
+  $("syls").innerHTML=cs.map((c,i)=>{const[l,v,t]=dec(c),p=[LJ[l],VJ[v]];if(t)p.push(TJ[t]);
+    return`<div class="syl" style="--i:${i}"><button class="sbig" data-say="${c}" aria-label="Nghe ${c}">${c}</button><div class="parts">${p.map((x,j)=>`<span style="--i:${i};--j:${j}">${x==="ㅇ"&&j===0?"ㅇ<small>câm</small>":x}</span>`).join("<em>+</em>")}</div><div class="srr">${L[l]+V[v]+T[t]}</div></div>`}).join("");
+  $("sylMod").hidden=false}
+
+/* ---------- Thêm / xoá từ ---------- */
+function addWord(e){e.preventDefault();const h=$("fh").value.trim(),m=$("fm2").value.trim();
+  if(!/[\uAC00-\uD7A3]/.test(h)||!m){toast("Hãy nhập từ có chữ Hangul và nghĩa.",1);return}
+  S.words.unshift({id:"w"+Date.now(),h,m,u:$("fu").value.trim()||"Chưa phân loại",e:$("fe").value.trim(),s:"review"});
+  order=null;idx=0;$("wordMod").hidden=true;$("wordForm").reset();$("fprev").textContent="—";renderAll();toast("Đã thêm từ mới vào kho.")}
+function setTab(t){const s=t==="study";$("study").hidden=!s;$("lib").hidden=s;$("tabStudy").classList.toggle("on",s);$("tabLib").classList.toggle("on",!s);
+  const v=$(s?"study":"lib");v.classList.remove("view");void v.offsetWidth;v.classList.add("view");if(!s)renderLib()}
+
+/* ---------- Sự kiện ---------- */
+$("tabStudy").onclick=()=>setTab("study");$("tabLib").onclick=()=>setTab("lib");
+$("unitSel").onchange=e=>{S.unit=e.target.value;idx=0;order=null;flipped=false;$("card").classList.remove("flipped");renderAll()};
+$("revBtn").onclick=()=>{S.rev=!S.rev;flipped=false;$("card").classList.remove("flipped");renderAll()};
+$("shufBtn").onclick=shuffle;
+$("scene").onclick=e=>{if(!e.target.closest("button"))flip()};$("flipBtn").onclick=flip;
+$("prevBtn").onclick=()=>go(idx-1);$("nextBtn").onclick=()=>go(idx+1);
+$("okBtn").onclick=()=>mark("known");$("rvBtn").onclick=()=>mark("review");
+$("bSpeak").onclick=e=>{e.stopPropagation();const w=cur();if(w)speak(w.h)};
+$("sylBtn").onclick=()=>{const w=cur();if(w)openSyl(w)};$("sylReplay").onclick=()=>sylWord&&openSyl(sylWord);
+$("syls").onclick=e=>{const b=e.target.closest("[data-say]");if(b)speak(b.dataset.say)};
+$("flts").onclick=e=>{const b=e.target.closest("[data-f]");if(!b)return;filter=b.dataset.f;idx=0;flipped=false;$("card").classList.remove("flipped");renderStudy()};
+$("emptyAdd").onclick=()=>{setTab("lib");$("wordMod").hidden=false};
+$("addBtn").onclick=()=>{$("wordMod").hidden=false;setTimeout(()=>$("fh").focus(),60)};
+$("wordForm").onsubmit=addWord;$("fh").oninput=()=>$("fprev").textContent=roman($("fh").value.trim())||"—";
+$("search").oninput=renderLib;
+/* ---------- Tự động tìm nghĩa và câu ví dụ (Claude qua capability sample) ---------- */
+let sample=null;
+(async()=>{try{sample=window.claude?await window.claude.use("sample"):null}catch(e){sample=null}
+  $("fillBtn").hidden=$("fnote").hidden=!sample;renderStudy()})();
+const errCopy=e=>e&&e.code==="not_granted"?"Bạn cần cho phép Claude để dùng tính năng này.":e&&e.code==="rate_limited"?"Đang gọi quá nhanh, hãy thử lại sau ít phút.":"Chưa tra được lúc này, hãy thử lại sau.";
+const lookup=h=>sample.json(`Bạn là giáo viên tiếng Hàn cho người Việt. Từ cần tra: "${h}". Chỉ trả về JSON hợp lệ, không thêm chữ nào khác: {"meaning":"nghĩa tiếng Việt ngắn gọn, tối đa 8 từ","example":"một câu tiếng Hàn đơn giản (TOPIK 1-2) có dùng đúng từ này","exampleVi":"bản dịch tiếng Việt của câu đó"}`,{modelTier:"quick"});
+const joinEx=r=>r&&r.example?r.example+(r.exampleVi?" — "+r.exampleVi:""):"";
+$("fillBtn").onclick=async()=>{const h=$("fh").value.trim(),b=$("fillBtn");
+  if(!/[\uAC00-\uD7A3]/.test(h)){toast("Hãy nhập từ tiếng Hàn trước.",1);return}
+  b.disabled=true;b.textContent="Đang tra cứu…";
+  try{const r=await lookup(h);if(!$("fm2").value.trim())$("fm2").value=r.meaning||"";if(!$("fe").value.trim())$("fe").value=joinEx(r);toast("Đã điền nghĩa và ví dụ.")}
+  catch(e){toast(errCopy(e),1)}finally{b.disabled=false;b.textContent="✦ Tự động điền"}};
+$("bGen").onclick=async e=>{e.stopPropagation();const w=cur(),b=$("bGen");if(!w)return;
+  b.disabled=true;b.textContent="Đang tạo…";
+  try{const r=await lookup(w.h);w.e=joinEx(r);save();renderStudy();renderLib();if(!w.e)toast("Chưa tạo được ví dụ.",1)}
+  catch(er){toast(errCopy(er),1)}finally{b.disabled=false;b.textContent="✦ Tạo câu ví dụ"}};
+$("list").onclick=e=>{const b=e.target.closest("[data-a]");if(!b)return;const w=S.words.find(x=>x.id===b.dataset.id);if(!w)return;
+  if(b.dataset.a==="say")speak(w.h);else if(confirm(`Xoá “${w.h} — ${w.m}” khỏi kho từ vựng?`)){S.words=S.words.filter(x=>x.id!==w.id);order=null;idx=0;renderAll();toast("Đã xoá từ vựng.")}};
+$("resetBtn").onclick=()=>{if(confirm("Khôi phục dữ liệu mẫu? Toàn bộ từ vựng hiện tại sẽ bị thay thế.")){S=seed();filter="all";order=null;idx=0;flipped=false;$("card").classList.remove("flipped");renderAll();toast("Đã khôi phục dữ liệu mẫu.")}};
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.close).hidden=true);
+document.querySelectorAll(".mod").forEach(m=>m.onclick=e=>{if(e.target===m)m.hidden=true});
+document.addEventListener("keydown",e=>{
+  const open=[...document.querySelectorAll(".mod")].find(m=>!m.hidden);
+  if(open){if(e.key==="Escape")open.hidden=true;return}
+  if(e.target.matches("input,textarea,select")||$("study").hidden)return;
+  if(e.code==="Space"){e.preventDefault();flip()}else if(e.key==="ArrowRight")go(idx+1);else if(e.key==="ArrowLeft")go(idx-1);
+  else if(e.key==="s"||e.key==="S"){const w=cur();if(w)speak(w.h)}else if(e.key==="r"||e.key==="R")shuffle()});
+renderAll();
+})();
+</script>
+</body>
+</html>
