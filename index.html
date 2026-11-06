@@ -144,7 +144,7 @@ select.field{width:auto;flex:1;min-width:130px}
   </section>
 
   <section id="lib" class="view" hidden>
-    <div class="bar"><input id="search" class="field" style="flex:1;min-width:150px" placeholder="Tìm từ Hàn, romaja hoặc nghĩa…" aria-label="Tìm kiếm"><button id="addBtn" class="btn p">＋ Thêm từ</button></div>
+    <div class="bar"><input id="search" class="field" style="flex:1;min-width:150px" placeholder="Tìm từ Hàn, romaja hoặc nghĩa…" aria-label="Tìm kiếm"><button id="impBtn" class="btn l">⇪ Nhập hàng loạt</button><button id="addBtn" class="btn p">＋ Thêm từ</button></div>
     <div class="list" id="list"></div>
   </section>
 </div>
@@ -160,6 +160,13 @@ select.field{width:auto;flex:1;min-width:130px}
   <label for="fe">Câu ví dụ (tuỳ chọn)</label><input id="fe" class="field ko">
   <div class="row" style="justify-content:flex-end"><button type="button" class="btn l" data-close="wordMod">Huỷ</button><button class="btn p">Lưu từ vựng</button></div>
 </form></div>
+
+<div class="mod" id="impMod" hidden><div class="sheet">
+  <h2>Nhập từ vựng hàng loạt</h2><p class="sub">Dán nội dung từ Google Docs. Mỗi dòng một từ, dạng <b>từ Hàn: nghĩa</b>. Dòng không đúng dạng (như tiêu đề) sẽ tự bị bỏ qua.</p>
+  <textarea id="impTxt" class="field ko" rows="9" style="margin-top:10px;resize:vertical" placeholder="촬영지: Địa điểm quay phim&#10;자막: phụ đề"></textarea>
+  <p class="sub" id="impInfo" style="margin:8px 0 0">Chưa có dữ liệu.</p>
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn l" data-close="impMod">Huỷ</button><button type="button" class="btn p" id="impGo">Nhập vào kho</button></div>
+</div></div>
 
 <div class="mod" id="sylMod" hidden><div class="sheet">
   <h2 id="sylTitle"></h2><p class="sub">Mỗi âm tiết ghép từ phụ âm đầu, nguyên âm và (có thể) patchim. Chạm vào âm tiết để nghe.</p>
@@ -274,6 +281,20 @@ function addWord(e){e.preventDefault();const h=$("fh").value.trim(),m=$("fm2").v
   order=null;idx=0;$("wordMod").hidden=true;$("wordForm").reset();$("fprev").textContent="—";renderAll();toast("Đã thêm từ mới vào kho.")}
 function setTab(t){const s=t==="study";$("study").hidden=!s;$("lib").hidden=s;$("tabStudy").classList.toggle("on",s);$("tabLib").classList.toggle("on",!s);
   const v=$(s?"study":"lib");v.classList.remove("view");void v.offsetWidth;v.classList.add("view");if(!s)renderLib()}
+
+/* ---------- Nhập hàng loạt ---------- */
+function parseImp(t){const ok=[],bad=[];
+  t.split(/\r?\n/).forEach(raw=>{const l=raw.replace(/[\u200b\ufeff]/g,"").trim();if(!l)return;
+    const m=l.match(/^([^:：]+)[:：]\s*(.+)$/);
+    if(m&&/[\uAC00-\uD7A3]/.test(m[1])&&m[2].trim())ok.push({h:m[1].trim(),m:m[2].trim()});else bad.push(l)});
+  return{ok,bad}}
+$("impBtn").onclick=()=>{$("impMod").hidden=false;setTimeout(()=>$("impTxt").focus(),60)};
+$("impTxt").oninput=()=>{const r=parseImp($("impTxt").value);$("impInfo").textContent=r.ok.length?`Nhận diện ${r.ok.length} từ hợp lệ, bỏ qua ${r.bad.length} dòng.`:"Chưa có dữ liệu."};
+$("impGo").onclick=()=>{const r=parseImp($("impTxt").value);if(!r.ok.length){toast("Không tìm thấy dòng nào đúng dạng “từ Hàn: nghĩa”.",1);return}
+  const have=new Set(S.words.map(w=>w.h)),add=[];let dup=0;
+  r.ok.forEach(x=>{if(have.has(x.h)){dup++;return}have.add(x.h);add.push({id:"w"+Date.now()+"_"+add.length,h:x.h,m:x.m,u:"Chưa phân loại",e:"",s:"review"})});
+  S.words=add.concat(S.words);order=null;idx=0;$("impMod").hidden=true;$("impTxt").value="";$("impInfo").textContent="Chưa có dữ liệu.";renderAll();
+  toast(`Đã nhập ${add.length} từ`+(dup?`, bỏ qua ${dup} từ trùng.`:"."))};
 
 /* ---------- Sự kiện ---------- */
 $("tabStudy").onclick=()=>setTab("study");$("tabLib").onclick=()=>setTab("lib");
